@@ -3,6 +3,7 @@ package com.udacity.dogs.service;
 import com.udacity.dogs.entity.Dog;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DogService {
 
@@ -14,4 +15,5 @@ public interface DogService {
 
     String retrieveDogBreedById(Long id);
 
+    Dog retrieveDogById(Long id);
 }

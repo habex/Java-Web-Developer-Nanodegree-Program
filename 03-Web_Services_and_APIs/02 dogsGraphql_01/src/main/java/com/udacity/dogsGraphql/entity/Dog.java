@@ -28,11 +28,6 @@ public class Dog {
         this.origin = origin;
     }
 
-    public Dog(String name, String breed) {
-        this.name = name;
-        this.breed = breed;
-    }
-
     public Dog() {
     }
 

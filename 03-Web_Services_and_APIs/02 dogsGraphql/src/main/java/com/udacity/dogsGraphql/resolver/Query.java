@@ -1,13 +1,15 @@
 package com.udacity.dogsGraphql.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLResolver;
+import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.udacity.dogsGraphql.entity.Dog;
 import com.udacity.dogsGraphql.exception.DogNotFoundException;
 import com.udacity.dogsGraphql.repository.DogRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-public class Query implements GraphQLResolver {
+@Component
+public class Query implements GraphQLQueryResolver {
 
     private DogRepository dogRepository;
 
@@ -19,25 +21,25 @@ public class Query implements GraphQLResolver {
         return dogRepository.findAll();
     }
 
-    public Dog findDogById(Long id) throws DogNotFoundException {
+    public Dog findDogById(Long id){
         Optional<Dog> optionalDog = dogRepository.findById(id);
 
-        if(optionalDog.isPresent()){
+        if(optionalDog.isPresent()) {
             Dog dog = optionalDog.get();
             return dog;
-        }else {
-            throw  new DogNotFoundException("DogNotFound",id);
+        } else {
+            throw new DogNotFoundException("Dog Not Found", id);
         }
     }
 
-    public String findDogBreedById(Long id) throws DogNotFoundException {
+    public Boolean deleteDogById(Long id){
         Optional<Dog> optionalDog = dogRepository.findById(id);
 
-        if(optionalDog.isPresent()){
-            Dog dog = optionalDog.get();
-            return dog.getBreed();
-        }else {
-            throw  new DogNotFoundException("DogNotFound",id);
+        if(optionalDog.isPresent()) {
+            dogRepository.delete(optionalDog.get());
+            return true;
+        } else {
+            throw new DogNotFoundException("Dog Not Found", id);
         }
     }
 

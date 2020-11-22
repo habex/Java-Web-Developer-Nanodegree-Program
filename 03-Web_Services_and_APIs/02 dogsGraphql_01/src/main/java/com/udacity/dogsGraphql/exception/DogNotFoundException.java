@@ -1,6 +1,5 @@
 package com.udacity.dogsGraphql.exception;
 
-
 import graphql.ErrorType;
 import graphql.GraphQLError;
 import graphql.language.SourceLocation;
@@ -11,20 +10,20 @@ import java.util.Map;
 
 public class DogNotFoundException extends RuntimeException implements GraphQLError {
 
-    private Map<String,Object> extensions = new HashMap<>();
+    private Map<String, Object> extensions = new HashMap<>();
 
-    public DogNotFoundException(String dogNotFound, Long inValidDogId) {
-    super(dogNotFound);
-    extensions.put("inValidDogId",inValidDogId);
+    public DogNotFoundException(String message, Long invalidDogId) {
+        super(message);
+        extensions.put("inValidDogId", invalidDogId);
     }
-
 
     @Override
     public List<SourceLocation> getLocations() {
         return null;
     }
 
-    public Map<String, Object> getExtensions(){
+    @Override
+    public Map<String, Object> getExtensions() {
         return extensions;
     }
 

@@ -19,6 +19,13 @@ public class DogServiceImpl implements DogService {
         return (List<Dog>) dogRepository.findAll();
     }
 
+    @Override
+    public Dog retrieveDogById(Long id) {
+        Optional<Dog> optionalDog = Optional.ofNullable(dogRepository.findById(id).get());
+        Dog dog = optionalDog.orElseThrow(DogNotFoundException::new);
+        return dog;
+    }
+
     public List<String> retrieveDogBreed() {
         return dogRepository.findAllBreed();
     }
@@ -28,9 +35,16 @@ public class DogServiceImpl implements DogService {
     }
 
     public String retrieveDogBreedById(Long id) {
-        Optional<String> optionalBreed = Optional.ofNullable(dogRepository.findBreedById(id));
-        String breed = optionalBreed.orElseThrow(DogNotFoundException::new);
-        return breed;
+        Optional<Optional<Dog>> optionalDog = Optional.ofNullable(dogRepository.findById(id));
+
+        Optional<Dog> dog = optionalDog.orElseThrow(DogNotFoundException::new);
+
+        if(!dog.isPresent()){
+            throw new DogNotFoundException();
+        }
+        return dog.get().getBreed();
     }
+
+
 
 }

@@ -1,14 +1,15 @@
-package com.udacity.dogs;
+package com.udacity.dogsGraphql;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-class DogsApplicationTests {
+public class GraphqlApplicationTests {
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 	}
 
 }
