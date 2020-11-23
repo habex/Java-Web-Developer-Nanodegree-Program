@@ -4,12 +4,15 @@ import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.udacity.dogsGraphql.entity.Dog;
 import com.udacity.dogsGraphql.exception.DogNotFoundException;
 import com.udacity.dogsGraphql.repository.DogRepository;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
 public class Query implements GraphQLQueryResolver {
+
+    Specification <Dog> dogSpecification = null;
 
     private DogRepository dogRepository;
 
